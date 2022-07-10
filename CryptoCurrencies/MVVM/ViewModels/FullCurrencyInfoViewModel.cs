@@ -51,10 +51,10 @@ namespace CryptoCurrencies.MVVM.ViewModels
             string str = wc.DownloadString("https://" + $"api.coincap.io/v2/assets/{currencyInfo.Name.ToLower().Replace(' ','-')}/history?interval=d1");
             JObject jo = JObject.Parse(str);
 
-            for (int i = 0; i < 24; i++)
+            for (int i = 0; i < jo["data"].Count(); i++)
             {
                 long unixDate = (long)jo["data"][i]["time"];
-                DateTime start = new DateTime(1971, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
                 DateTime date = start.AddMilliseconds(unixDate).ToLocalTime();
 
                 Points.Add(new DataPoint(DateTimeAxis.ToDouble(date), (double)jo["data"][i]["priceUsd"]));
