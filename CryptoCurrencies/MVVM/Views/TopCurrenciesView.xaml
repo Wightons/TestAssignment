@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="CryptoCurrencies.MVVM.Views.TopCurrenciesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CryptoCurrencies.MVVM.Views" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="850" d:DesignWidth="1500">
+    <Grid>
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0,0,50,6">
+            <TextBlock Text="Displayed Currencies Number: " VerticalAlignment="Center"/>
+            <TextBox Width="100" FontSize="20" Text="{Binding NumberOfCurrencies}"/>
+            <Button  Height="25" Width="100"  Background="LightBlue" Command="{Binding RefreshCommand}">
+                <TextBlock Text="Refresh" TextAlignment="Center" HorizontalAlignment="Center" FontFamily="Oswald" FontWeight="SemiBold"/>
+            </Button>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,10" Orientation="Horizontal">
+            <Button  Height="25" Width="100"  Background="LightBlue" Command="{Binding SearchCommand}">
+                <TextBlock Text="Search" TextAlignment="Center" HorizontalAlignment="Center" FontFamily="Oswald" FontWeight="SemiBold"/>
+            </Button>
+            <Button  Height="25" Width="100"  Background="LightBlue" Command="{Binding CalculateCommand}">
+                <TextBlock Text="Calculator" TextAlignment="Center" HorizontalAlignment="Center" FontFamily="Oswald" FontWeight="SemiBold"/>
+            </Button>
+        </StackPanel>
+
+        <Border Margin="10,10,10,40" CornerRadius="9" Background="AliceBlue" BorderThickness="0">
+            <WrapPanel HorizontalAlignment="Center">
+                <StackPanel Grid.Row="0" Margin="0,5,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+                    <TextBlock Text="Rank" FontSize="15" Margin="10,0,0,0"/>
+                    <TextBlock Text="Name" FontSize="15" Margin="40,0,0,0"/>
+                    <TextBlock Text="Price" FontSize="15"  Margin="180,0,0,0"/>
+                    <TextBlock Text="Market Cap" FontSize="15" Margin="90,0,0,0"/>
+                    <TextBlock Text="VWAP (24hr)" FontSize="15" Margin="40,0,0,0"/>
+                    <TextBlock Text="Supply" FontSize="15" Margin="40,0,0,0"/>
+                    <TextBlock Text="Volume (24hr)" FontSize="15" Margin="50,0,0,0"/>
+                    <TextBlock Text="Change (24hr)" FontSize="15" Margin="70,0,0,0"/>
+                </StackPanel>
+
+                <ListBox SelectedItem="{Binding SelectedCurrency}" Grid.Row="1" Margin="5" BorderThickness="0" ItemsSource="{Binding CollectionOfCurrencies}" VerticalAlignment="Bottom" Background="Transparent">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectionCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="10" BorderThickness="2" BorderBrush="Gray" Height="60" Width="1160">
+                                <WrapPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Rank}" Width="35" VerticalAlignment="Center" FontSize="20" Margin="5,0,0,0"  FontFamily="Lato" TextAlignment="Center"/>
+                                    <Image Source="{Binding ImageURL}" Height="50" Margin="20,0,0,0" VerticalAlignment="Center"/>
+                                    <StackPanel Width="67" VerticalAlignment="Center" Margin="6,0,0,0">
+                                        <TextBlock Text="{Binding Name}" FontSize="15" FontFamily="Lato"/>
+                                        <TextBlock Text="{Binding Symbol}" FontSize="15" FontFamily="Helvetica Neue"/>
+                                    </StackPanel>
+
+                                    <WrapPanel Margin="100,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock Text="$" FontSize="15" FontFamily="sans-serif"/>
+                                        <TextBlock Text="{Binding PriceUSD}"  FontSize="15" FontFamily="sans-serif"/>
+                                    </WrapPanel>
+                                    <WrapPanel  Margin="40,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock Text="$" FontSize="15" FontFamily="sans-serif"/>
+                                        <TextBlock Text="{Binding MarketCapUsd}" FontSize="15" FontFamily="sans-serif"/>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="40,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock Text="$" FontSize="15" FontFamily="sans-serif"/>
+                                        <TextBlock Text="{Binding VWAP24Hr}"   FontSize="15" FontFamily="sans-serif"/>
+                                    </WrapPanel>
+                                    <TextBlock Text="{Binding Supply}" Margin="40,0,0,0" VerticalAlignment="Center" FontSize="15" FontFamily="sans-serif"/>
+                                    <WrapPanel Margin="40,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock Text="$" FontSize="15" FontFamily="sans-serif"/>
+                                        <TextBlock Text="{Binding VolumeUsd24Hr}"   FontSize="15" FontFamily="sans-serif"/>
+                                    </WrapPanel>
+                                    <WrapPanel Margin="40,0,12,0" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding ChangePercent24Hr}"  FontSize="15" FontFamily="sans-serif"/>
+                                        <TextBlock Text="%" FontSize="15" FontFamily="sans-serif"/>
+                                    </WrapPanel>
+                                </WrapPanel>
+                            </Border>
+
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+
+            </WrapPanel>
+        </Border>
+    </Grid>
+</UserControl>

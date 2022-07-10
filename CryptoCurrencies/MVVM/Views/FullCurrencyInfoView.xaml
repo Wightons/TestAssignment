@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="CryptoCurrencies.MVVM.Views.FullCurrencyInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CryptoCurrencies.MVVM.Views" 
+             xmlns:oxy="http://oxyplot.org/wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="850" d:DesignWidth="1500">
+
+    <StackPanel>
+
+
+        <Button Background="LightBlue" Width="50" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Content="Back" Command="{Binding BackCommand}"/>
+
+
+        <oxy:PlotView Model="{Binding PlotModel}" Background="LightGray" Height="700"/>
+
+    </StackPanel>
+
+
+</UserControl>
